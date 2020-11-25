@@ -10,10 +10,13 @@ public class RobotFreeAnim : MonoBehaviour {
     Rigidbody rigidbody;
     CharacterController controller;
     private float speed = 12.0F;
+
     private float verticalspeed = 1.25f;
     private float walkspeed = 2.0F;
+
     private float gravity = -10.0f;
-    private float jumpHeight = 4.5f;
+
+    private float jumpHeight = 6f;
 
 
     private Vector3 moveDirection = Vector3.zero;
@@ -31,8 +34,6 @@ public class RobotFreeAnim : MonoBehaviour {
         anim.SetBool("Roll_Anim", true);
 
     }
-
-
     void FixedUpdate()
     {
         CheckKey();
@@ -68,14 +69,12 @@ public class RobotFreeAnim : MonoBehaviour {
         }
         else
         {
-            moveDirection = moveDirection * Time.deltaTime * 0.1f;
+            moveDirection = moveDirection * Time.deltaTime * 0.8f;
         }
         if (moveDirection.z + moveDirection.x > 0)
             anim.SetFloat("Speed", Mathf.Min(moveDirection.z + moveDirection.x, 3f));
         else
             anim.SetFloat("Speed", Mathf.Max(moveDirection.z + moveDirection.x, -3f));
-
-
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -86,6 +85,8 @@ public class RobotFreeAnim : MonoBehaviour {
                 jumpSpeed.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
             }
         }
+
+
         jumpSpeed.y += gravity * Time.deltaTime;
         if (jumpSpeed.y < 0)
         {
@@ -125,7 +126,6 @@ public class RobotFreeAnim : MonoBehaviour {
 		// Roll
 		if (Input.GetKeyDown(KeyCode.R))
 		{
-            controller.Move(new Vector3(0,0,0));
             if (anim.GetBool("Roll_Anim"))
 			{
 				anim.SetBool("Roll_Anim", false);
