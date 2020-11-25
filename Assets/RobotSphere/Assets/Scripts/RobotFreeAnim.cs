@@ -82,22 +82,9 @@ public class RobotFreeAnim : MonoBehaviour {
         {
             if (IsGrounded()) // Grounded
             {
-                float h = Input.GetAxis("Horizontal");
-                float v = Input.GetAxis("Vertical");
-                if (h==0)
-                {
-                    moveDirection.x *= 0.3f;
-                }
-                else
-                    moveDirection.x = h * speed;
-                if (v==0)
-                {
-                    moveDirection.z *= 0.3f;
-                }
-                else
-                    moveDirection.z = v * speed;
-                moveDirection = new Vector3(moveDirection.x, 0, moveDirection.z);
+                moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
                 moveDirection = transform.TransformDirection(moveDirection);
+                moveDirection *= speed;
             }
             else // in Air
             {
