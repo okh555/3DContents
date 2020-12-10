@@ -4,38 +4,33 @@ using UnityEngine;
 
 public class Booster : Item
 {
-    public float time = 5;
-    public float blinkTime = 3;
-    public float spriteBlinkingTimer = 0.0f;
-    public float spriteBlinkingMiniDuration = 0.1f;
-    public float spriteBlinkingTotalTimer = 0.0f;
-    public float spriteBlinkingTotalDuration = 1.0f;
-    public bool startBlinking = false;
 
-
-    private GameObject player;
-    private bool trigger = false;
-    private float currentTime = 0;
-
-    // Start is called before the first frame update
-    void Start()
+    new public void UsingItem()
     {
+        usingItem = true;
+        currentTime = Time.time;
+        
 
+        player.GetComponent<PlayerMovement>().speed *= 1.4f;
+        this.gameObject.GetComponent<Renderer>().enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Time.time - currentTime > time && player != null)
+        if (usingItem)
         {
-            player.GetComponent<RobotFreeAnim>().speed *= 1.0f / 1.4f;
-            Destroy(this.gameObject);
-        }
+            if (Time.time - currentTime > time && player != null)
+            {
+                player.GetComponent<PlayerMovement>().speed *= 1.0f / 1.4f;
+                Destroy(this.gameObject);
+            }
 
-        if (Time.time - currentTime > blinkTime && player != null)
-        {
-            startBlinking = true;
-            SpriteBlinkingEffect();
+            if (Time.time - currentTime > blinkTime && player != null)
+            {
+                startBlinking = true;
+                SpriteBlinkingEffect();
+            }
         }
     }
 
@@ -44,10 +39,9 @@ public class Booster : Item
         if (collider.gameObject.name == "Player")
         {
             player = collider.gameObject;
-            player.GetComponent<RobotFreeAnim>().speed *= 1.4f;
-            this.gameObject.GetComponent<Renderer>().enabled = false;
+            ItemController = player.GetComponent<ItemController>();
+            ItemController.PushItem(this);
             trigger = true;
-            currentTime = Time.time;
         }
     }
 

@@ -2,18 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RobotFreeAnim : MonoBehaviour {
-
-    Vector3 rot = Vector3.zero;
-    Animator anim;
-    Rigidbody rigidbody;
-    CharacterController controller;
-
-
-    public float speed { get; set; } = 13.0F;
-    public float jumpHeight { get; set; } = 6f;
-
-
+public class PlayerMovement : MonoBehaviour {
     private float verticalspeed = 1.25f;
     private float walkspeed = 2.0F;
     private float rotSpeed = 40f;
@@ -25,13 +14,17 @@ public class RobotFreeAnim : MonoBehaviour {
     private Vector3 moveDirection = Vector3.zero;
     private Vector3 jumpSpeed = new Vector3(0f, 0f, 0f);
 
+    Vector3 rot = Vector3.zero;
+    Animator anim;
+    Rigidbody rigidbody;
+    CharacterController controller;
 
 
+    public Vector3 Speed {   get;   private set;  } // 참고용 speed
+    public float speed { get; set; } = 13.0F; // 설정용 -> private으로 바꿀 예정
+    public float jumpHeight { get; set; } = 6f; // 설정용 -> private으로 바꿀 예정
 
-    public Vector3 Speed {   get;   private set;  }
 
-
-   
     // Use this for initialization
     void Awake()
     {
@@ -51,7 +44,6 @@ public class RobotFreeAnim : MonoBehaviour {
         Move();
         gameObject.transform.eulerAngles = rot;
         Reset();
-        Debug.Log(speed);
     }
 
 

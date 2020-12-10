@@ -1,32 +1,30 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SizeDown : Item 
 {
-    public float time = 5;
-    private GameObject player;
-    private bool trigger = false;
-    private float currentTime = 0;
 
-    // Start is called before the first frame update
-    void Start()
+    public override void UsingItem()
     {
-        if (Time.time - currentTime > time && player != null)
-        {
-            player.GetComponent<RobotFreeAnim>().jumpHeight *= 1.0f / 2.0f;
-            Destroy(this.gameObject);
-        }
-    }
+        usingItem = true;
+        currentTime = Time.time;
+        time = 6;
 
+        player.transform.localScale = player.transform.localScale * 0.5f;
+        player.GetComponent<PlayerMovement>().speed *= 1.5f;
+    }
     // Update is called once per frame
+
+
     void Update()
     {
-        if (Time.time - currentTime > time && player != null)
+        if (usingItem)
         {
-            player.transform.localScale = player.transform.localScale * 2f;
-            player.GetComponent<RobotFreeAnim>().speed *= 2.0f / 3.0f;
-            Destroy(this.gameObject);
+            if (Time.time - currentTime > time && player != null)
+            {
+                player.transform.localScale = player.transform.localScale * 2f;
+                player.GetComponent<PlayerMovement>().speed *= 2.0f / 3.0f;
+                Destroy(this.gameObject);
+            }
         }
 
     }
@@ -36,11 +34,9 @@ public class SizeDown : Item
         if (collider.gameObject.name == "Player" && trigger == false)
         {
             player = collider.gameObject;
-            player.transform.localScale = player.transform.localScale * 0.5f;
-            player.GetComponent<RobotFreeAnim>().speed *= 1.5f;
             this.gameObject.GetComponent<Renderer>().enabled = false;
+            ItemController.PushItem(this);
             trigger = true;
-            currentTime = Time.time;
         }
     }
 }

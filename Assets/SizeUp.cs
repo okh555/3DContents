@@ -2,34 +2,44 @@
 
 public class SizeUp : Item
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void UsingItem()
     {
-        time = 6;
+        Debug.Log("Using Size Up");
+
+        time = 6f;
+        usingItem = true;
+        currentTime = Time.time;
+
+        player.transform.localScale = player.transform.localScale * 2f;
+        player.GetComponent<PlayerMovement>().speed *= 2.0f / 3.0f;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Time.time - currentTime > time && player != null)
+        if (usingItem)
         {
-            player.transform.localScale = player.transform.localScale * 0.5f;
-            player.GetComponent<RobotFreeAnim>().speed *= 1.5f;
-            Destroy(this.gameObject);
+            if (Time.time - currentTime > time && player != null)
+            {
+                player.transform.localScale = player.transform.localScale * 0.5f;
+                player.GetComponent<PlayerMovement>().speed *= 1.5f;
+                Destroy(this.gameObject);
+            }
         }
 
     }
 
     void OnTriggerEnter(Collider collider)
     {
+        Debug.Log(this.ToString());
         if (collider.gameObject.name == "Player" && trigger == false)
         {
-            player = collider.gameObject;
-            player.transform.localScale = player.transform.localScale * 2f;
-            player.GetComponent<RobotFreeAnim>().speed *= 2.0f / 3.0f;
             this.gameObject.GetComponent<Renderer>().enabled = false;
+            player = collider.gameObject;
+            ItemController.PushItem(this);
             trigger = true;
-            currentTime = Time.time;
         }
     }
+
 }

@@ -4,24 +4,25 @@ using UnityEngine;
 
 public class DoubleJump : Item
 {
-    public float time = 5;
-    private GameObject player;
-    private bool trigger = false;
-    private float currentTime = 0;
-
-    // Start is called before the first frame update
-    void Start()
+    public override void UsingItem()
     {
-        
-    }
+        usingItem = true;
+        currentTime = Time.time;
 
+
+        player.GetComponent<PlayerMovement>().jumpHeight *= 2f;
+
+    }
     // Update is called once per frame
     void Update()
     {
-        if (Time.time - currentTime > time && player != null)
+        if (usingItem)
         {
-            player.GetComponent<RobotFreeAnim>().jumpHeight *= 1.0f/2.0f;
-            Destroy(this.gameObject);
+            if (Time.time - currentTime > time && player != null)
+            {
+                player.GetComponent<PlayerMovement>().jumpHeight *= 1.0f / 2.0f;
+                Destroy(this.gameObject);
+            }
         }
     }
 
@@ -30,10 +31,10 @@ public class DoubleJump : Item
         if (collider.gameObject.name == "Player" && trigger == false)
         {
             player = collider.gameObject;
-            player.GetComponent<RobotFreeAnim>().jumpHeight *= 2f;
             this.gameObject.GetComponent<Renderer>().enabled = false;
+            ItemController = player.GetComponent<ItemController>();
+            ItemController.PushItem(this);
             trigger = true;
-            currentTime = Time.time;
         }
     }
 
