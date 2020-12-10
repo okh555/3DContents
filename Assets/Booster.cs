@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Booster : MonoBehaviour
+public class Booster : Item
 {
     public float time = 5;
     public float blinkTime = 3;

@@ -1,22 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class SizeUp : MonoBehaviour
+public class SizeUp : Item
 {
-    public float time = 5;
-    private GameObject player;
-    private bool trigger = false;
-    private float currentTime = 0;
-
     // Start is called before the first frame update
     void Start()
     {
-        if (Time.time - currentTime > time && player != null)
-        {
-            player.GetComponent<RobotFreeAnim>().jumpHeight *= 1.0f / 2.0f;
-            Destroy(this.gameObject);
-        }
+        time = 6;
     }
 
     // Update is called once per frame

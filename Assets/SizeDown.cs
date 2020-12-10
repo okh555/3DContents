@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SizeDown : MonoBehaviour
+public class SizeDown : Item 
 {
     public float time = 5;
     private GameObject player;

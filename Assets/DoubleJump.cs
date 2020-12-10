@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoubleJump : MonoBehaviour
+public class DoubleJump : Item
 {
     public float time = 5;
     private GameObject player;
