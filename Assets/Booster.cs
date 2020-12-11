@@ -5,14 +5,13 @@ using UnityEngine;
 public class Booster : Item
 {
 
-    new public void UsingItem()
+    public override void UsingItem()
     {
+        time = 6;
         usingItem = true;
         currentTime = Time.time;
-        
-
         player.GetComponent<PlayerMovement>().speed *= 1.4f;
-        this.gameObject.GetComponent<Renderer>().enabled = false;
+
     }
 
     // Update is called once per frame
@@ -39,6 +38,7 @@ public class Booster : Item
         if (collider.gameObject.name == "Player")
         {
             player = collider.gameObject;
+            this.gameObject.GetComponent<Renderer>().enabled = false;
             ItemController = player.GetComponent<ItemController>();
             ItemController.PushItem(this);
             trigger = true;

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement : MonoBehaviour
+{
     private float verticalspeed = 1.25f;
     private float walkspeed = 2.0F;
     private float rotSpeed = 40f;
@@ -20,7 +21,10 @@ public class PlayerMovement : MonoBehaviour {
     CharacterController controller;
 
 
-    public Vector3 Speed {   get;   private set;  } // 참고용 speed
+    public Vector3 Speed { get; private set; } // 참고용 speed
+
+
+
     public float speed { get; set; } = 13.0F; // 설정용 -> private으로 바꿀 예정
     public float jumpHeight { get; set; } = 6f; // 설정용 -> private으로 바꿀 예정
 
@@ -35,7 +39,7 @@ public class PlayerMovement : MonoBehaviour {
 
         anim.SetBool("Open_Anim", true);
         anim.SetBool("Roll_Anim", true);
-  
+
         distToGround = GetComponent<SphereCollider>().bounds.extents.y;
     }
     void FixedUpdate()
@@ -51,16 +55,18 @@ public class PlayerMovement : MonoBehaviour {
     {
         if (transform.position.y < -5)
         {
-            speed = 20.0F;
+            speed = 13.0F;
             verticalspeed = 1.25f;
             walkspeed = 2.0F;
             rotSpeed = 40f;
-            gravity = -10.0f;
+            gravity = -20.0f;
             jumpHeight = 6f;
             moveDirection = Vector3.zero;
             jumpSpeed = new Vector3(0f, 0f, 0f);
 
-            transform.position = new Vector3(0,3f,0);
+
+
+            transform.position = new Vector3(0, 3f, 0);
             anim.SetBool("Roll_Anim", false);
             anim.SetBool("Open_Anim", false);
             anim.SetBool("Open_Anim", true);
@@ -68,7 +74,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void Move()// 캐릭터 움직임
-    {        
+    {
 
         if (anim.GetBool("Open_Anim") && anim.GetCurrentAnimatorStateInfo(0).IsName("closed_Roll_Loop")) // Rolling
         {
@@ -112,16 +118,17 @@ public class PlayerMovement : MonoBehaviour {
         jumpSpeed.y += gravity * Time.deltaTime;
         if (jumpSpeed.y < 0)
         {
-            jumpSpeed.y = Mathf.Max(gravity *Time.deltaTime, jumpSpeed.y);
+            jumpSpeed.y = Mathf.Max(gravity * Time.deltaTime, jumpSpeed.y);
         }
         controller.Move(jumpSpeed * Time.deltaTime); // Jump
         Speed = moveDirection + jumpSpeed;
 
     }
 
-	void CheckKey()
-	{
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("closed_Roll_Loop")) {
+    void CheckKey()
+    {
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("closed_Roll_Loop"))
+        {
             if (Input.GetKey(KeyCode.Q))
             {
                 rot[1] -= rotSpeed * Time.fixedDeltaTime;
@@ -135,15 +142,15 @@ public class PlayerMovement : MonoBehaviour {
 
         }
 
-		// Walk
-		if (Input.GetKey(KeyCode.W) && !anim.GetBool("Roll_Anim"))
-		{
-			anim.SetBool("Walk_Anim", true);
+        // Walk
+        if (Input.GetKey(KeyCode.W) && !anim.GetBool("Roll_Anim"))
+        {
+            anim.SetBool("Walk_Anim", true);
         }
-		else if (Input.GetKeyUp(KeyCode.W))
-		{
-			anim.SetBool("Walk_Anim", false);
-		}
+        else if (Input.GetKeyUp(KeyCode.W))
+        {
+            anim.SetBool("Walk_Anim", false);
+        }
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("anim_Walk_Loop") || anim.GetCurrentAnimatorStateInfo(0).IsName("anim_Idle_Loop_S"))
         {
             // Rotate Left
@@ -159,39 +166,36 @@ public class PlayerMovement : MonoBehaviour {
             }
         }
 
-		// Roll
-		if (Input.GetKeyDown(KeyCode.R))
-		{
+        // Roll
+        if (Input.GetKeyDown(KeyCode.R))
+        {
             if (anim.GetBool("Roll_Anim"))
-			{
-				anim.SetBool("Roll_Anim", false);
-			}
-			else
-			{
-				anim.SetBool("Roll_Anim", true);
-			}
-		}
+            {
+                anim.SetBool("Roll_Anim", false);
+            }
+            else
+            {
+                anim.SetBool("Roll_Anim", true);
+            }
+        }
 
-		// Close
-		if (Input.GetKeyDown(KeyCode.LeftControl))
-		{
-			if (!anim.GetBool("Open_Anim"))
-			{
-				anim.SetBool("Open_Anim", true);
-			}
-			else
-			{
-				anim.SetBool("Open_Anim", false);
-			}
-		}
-	}
+        // Close
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            if (!anim.GetBool("Open_Anim"))
+            {
+                anim.SetBool("Open_Anim", true);
+            }
+            else
+            {
+                anim.SetBool("Open_Anim", false);
+            }
+        }
+    }
     bool IsGrounded()
     {
         return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
     }
-
-
-    
 }
 
 
