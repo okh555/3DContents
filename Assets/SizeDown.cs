@@ -35,6 +35,7 @@ public class SizeDown : Item
         {
             player = collider.gameObject;
             this.gameObject.GetComponent<Renderer>().enabled = false;
+            this.gameObject.GetComponent<Collider>().enabled = false;
             ItemController.PushItem(this);
             trigger = true;
         }

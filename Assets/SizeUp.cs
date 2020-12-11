@@ -35,6 +35,7 @@ public class SizeUp : Item
         Debug.Log(this.ToString());
         if (collider.gameObject.name == "Player" && trigger == false)
         {
+            this.gameObject.GetComponent<Collider>().enabled = false;
             this.gameObject.GetComponent<Renderer>().enabled = false;
             player = collider.gameObject;
             ItemController.PushItem(this);

@@ -32,6 +32,7 @@ public class DoubleJump : Item
         {
             player = collider.gameObject;
             this.gameObject.GetComponent<Renderer>().enabled = false;
+            this.gameObject.GetComponent<Collider>().enabled = false;
             ItemController = player.GetComponent<ItemController>();
             ItemController.PushItem(this);
             trigger = true;

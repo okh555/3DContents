@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private float verticalspeed = 1.25f;
-    private float walkspeed = 2.0F;
-    private float rotSpeed = 40f;
-    private float distToGround;
-    private float gravity = -20.0f;
+    private float verticalspeed = 1.25f; // 가로로 움직이는 속도(방향)
+    private float walkspeed = 2.0F; // 걷는 모션일 때 속도
+    private float rotSpeed = 40f; // 회전 할 때 속도
+    private float distToGround; // 땅과 player 사이 거리
+    private float gravity = -20.0f; // 중력
+    private bool wallJump = false; // 벽점프를 위한 bool 변수
 
-    private int jumpCount = 0;
+
 
     private Vector3 moveDirection = Vector3.zero;
     private Vector3 jumpSpeed = new Vector3(0f, 0f, 0f);
@@ -27,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
 
     public float speed { get; set; } = 13.0F; // 설정용 -> private으로 바꿀 예정
     public float jumpHeight { get; set; } = 6f; // 설정용 -> private으로 바꿀 예정
-
+    public float wallJumpHeight { get; set; } = 10f;
 
     // Use this for initialization
     void Awake()
@@ -45,9 +46,17 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         CheckKey();
-        Move();
+        
+        if(wallJump)
+        {
+            wallMove();
+
+        }
+        else
+        {
+            Move();
+        }
         gameObject.transform.eulerAngles = rot;
-        Reset();
     }
 
 
@@ -108,9 +117,15 @@ public class PlayerMovement : MonoBehaviour
                 controller.Move(walkDirection * Time.deltaTime);
             }
         }
+
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (IsGrounded() && anim.GetBool("Roll_Anim"))
+            {
+                jumpSpeed.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+            }
+            if(wallJump && anim.GetBool("Roll_Anim"))
             {
                 jumpSpeed.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
             }
@@ -123,6 +138,28 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(jumpSpeed * Time.deltaTime); // Jump
         Speed = moveDirection + jumpSpeed;
 
+    }
+
+
+    void wallMove()
+    {
+        controller.velocity.Set(0, 0, 0);
+        controller.enabled = false;
+        anim.SetFloat("Speed", 0);
+        if(Input.GetKey(KeyCode.Space))
+        {
+
+            wallJump = false;
+            controller.enabled = true;
+            jumpSpeed.y = Mathf.Sqrt(wallJumpHeight * -3.0f * gravity);
+            jumpSpeed.y += gravity * Time.deltaTime;
+            if (jumpSpeed.y < 0)
+            {
+                jumpSpeed.y = Mathf.Max(gravity * Time.deltaTime, jumpSpeed.y);
+            }
+            controller.Move(jumpSpeed * Time.deltaTime); // Jump
+            Speed = moveDirection + jumpSpeed;
+        }
     }
 
     void CheckKey()
@@ -195,6 +232,16 @@ public class PlayerMovement : MonoBehaviour
     bool IsGrounded()
     {
         return Physics.Raycast(transform.position, -Vector3.up, distToGround + 0.1f);
+    }
+
+
+    void OnTriggerEnter(Collider collider)
+    {
+        if(collider.gameObject.tag == "Wall")
+        {
+            wallJump = true;
+            collider.gameObject.tag = "Untagged";
+        }
     }
 }
 

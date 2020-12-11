@@ -40,6 +40,7 @@ public class Booster : Item
             player = collider.gameObject;
             this.gameObject.GetComponent<Renderer>().enabled = false;
             ItemController = player.GetComponent<ItemController>();
+            this.gameObject.GetComponent<Collider>().enabled = false;
             ItemController.PushItem(this);
             trigger = true;
         }
