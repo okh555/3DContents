@@ -12,7 +12,6 @@ public class PlayerMovement : MonoBehaviour
     private bool wallJump = false; // 벽점프를 위한 bool 변수
 
 
-
     private Vector3 moveDirection = Vector3.zero;
     private Vector3 jumpSpeed = new Vector3(0f, 0f, 0f);
 
@@ -122,13 +121,14 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (IsGrounded() && anim.GetBool("Roll_Anim"))
-            {
+            {  
                 jumpSpeed.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
             }
             if(wallJump && anim.GetBool("Roll_Anim"))
             {
                 jumpSpeed.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
             }
+
         }
         jumpSpeed.y += gravity * Time.deltaTime;
         if (jumpSpeed.y < 0)

@@ -7,11 +7,11 @@ public class Moving_Platform : MonoBehaviour
 {
     public GameObject Player;
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
        
-            if(other.gameObject.tag == "platform")
-             Player.transform.parent = transform;
+            if(other.tag == "Player")
+                 Player.transform.parent = transform;
         
     }
 
