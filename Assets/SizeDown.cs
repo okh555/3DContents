@@ -17,6 +17,7 @@ public class SizeDown : Item
 
     void Update()
     {
+        code = 2;
         if (usingItem)
         {
             if (Time.time - currentTime > time && player != null)

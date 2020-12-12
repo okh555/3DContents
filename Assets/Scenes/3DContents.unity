@@ -5943,6 +5943,23 @@ PrefabInstance:
       propertyPath: m_Name
       value: UICanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 7225320986949047684, guid: ba5ec3a7f97fa9d46a7f6e90fb093dae,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -40
+      objectReference: {fileID: 0}
+    - target: {fileID: 7225320986949047685, guid: ba5ec3a7f97fa9d46a7f6e90fb093dae,
+        type: 3}
+      propertyPath: m_Text
+      value: 'Velocity : 0
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7225320986949047685, guid: ba5ec3a7f97fa9d46a7f6e90fb093dae,
+        type: 3}
+      propertyPath: m_FontData.m_FontStyle
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba5ec3a7f97fa9d46a7f6e90fb093dae, type: 3}
 --- !u!1001 &8123377616470280598

@@ -17,6 +17,7 @@ public class Booster : Item
     // Update is called once per frame
     void Update()
     {
+        code = 3;
         if (usingItem)
         {
             if (Time.time - currentTime > time && player != null)

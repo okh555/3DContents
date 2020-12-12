@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     CharacterController controller;
 
 
-    public Vector3 Speed { get; private set; } // 참고용 speed
+    public Vector3 Speed { get; set; } // 참고용 speed
 
 
 

@@ -10,6 +10,7 @@ using UnityEngine;
     protected float currentTime = 0; // 아이템 시작 시간
     protected bool usingItem = false; // 아이템 사용 여부
 
+    public int code = 0;
     protected float blinkTime = 3;
     protected float spriteBlinkingTimer = 0.0f; // 작은 깜박임 단위 시작 시간
     protected float spriteBlinkingMiniDuration = 0.1f; // 깜박임 빈도 시간

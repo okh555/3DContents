@@ -16,6 +16,7 @@ public class DoubleJump : Item
     // Update is called once per frame
     void Update()
     {
+        code = 1;
         if (usingItem)
         {
             if (Time.time - currentTime > time && player != null)

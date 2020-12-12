@@ -44,11 +44,14 @@ public class ItemController : MonoBehaviour
         if(items.Count > 0)
         {
             for (int i = 0; i < items.Count; i++)
-                result[i] = 1;
-           /* switch()
             {
-                case
-            }*/
+                if (items[i].code == 1)
+                    result[i] = 1;
+                if (items[i].code == 2)
+                    result[i] = 2;
+                if (items[i].code == 3)
+                    result[i] = 3;
+            }
         }
         return result;
     }
