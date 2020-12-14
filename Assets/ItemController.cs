@@ -31,7 +31,6 @@ public class ItemController : MonoBehaviour
         {
             items[2].UsingItem();
             items.RemoveAt(2);
-            
         }
     }
 

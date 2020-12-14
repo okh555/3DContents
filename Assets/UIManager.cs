@@ -55,7 +55,7 @@ public class UIManager : MonoBehaviour
 
     void SetSpeed()
     {
-       speed.text = "Velocity : " + -1 * (int)playerMovement.Speed.y;
+       speed.text = "Velocity : " +   (int)playerMovement.Speed.y;
     }
 
     void SetItem()
@@ -80,7 +80,6 @@ public class UIManager : MonoBehaviour
             }
             else
             {
-                item[i].color = Color.black;
                 t = Resources.Load("basic") as Texture;
                 item[i].texture = t;
             }
