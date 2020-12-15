@@ -997,8 +997,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 233633435}
-  m_LocalRotation: {x: -0.00000070234023, y: 0.9622709, z: -0.27209318, w: -0.0000024838607}
-  m_LocalPosition: {x: 1.0000443, y: 3.8062866, z: 6.579194}
+  m_LocalRotation: {x: -0.0000007013962, y: 0.9622709, z: -0.27209318, w: -0.0000024805222}
+  m_LocalPosition: {x: -0.11995571, y: 3.8062866, z: 6.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4385,8 +4385,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1502602933}
-  m_LocalRotation: {x: -0.00000070234023, y: 0.9622709, z: -0.27209318, w: -0.0000024838607}
-  m_LocalPosition: {x: 1.0000443, y: 3.8062866, z: 6.579194}
+  m_LocalRotation: {x: -0.0000007013962, y: 0.9622709, z: -0.27209318, w: -0.0000024805222}
+  m_LocalPosition: {x: -0.11995571, y: 3.8062866, z: 6.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1132503121}
@@ -5134,6 +5134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1975303058}
   - component: {fileID: 1975303057}
+  - component: {fileID: 1975303059}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -5161,12 +5162,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1975303056}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.24390894, y: 1.3622224, z: 45.72674}
+  m_LocalPosition: {x: -0.24390894, y: -18.02, z: 45.72674}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1975303059
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1975303056}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 500, y: 1, z: 500}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2009393373
 GameObject:
   m_ObjectHideFlags: 0
@@ -6193,7 +6207,7 @@ PrefabInstance:
     - target: {fileID: 3597292167278320264, guid: 7b46d8edc98f2354baeb2e41da4989bf,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1
+      value: -0.12
       objectReference: {fileID: 0}
     - target: {fileID: 3597292167278320264, guid: 7b46d8edc98f2354baeb2e41da4989bf,
         type: 3}
@@ -6203,7 +6217,7 @@ PrefabInstance:
     - target: {fileID: 3597292167278320264, guid: 7b46d8edc98f2354baeb2e41da4989bf,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.0108058
+      value: -2.01
       objectReference: {fileID: 0}
     - target: {fileID: 3597292167278320264, guid: 7b46d8edc98f2354baeb2e41da4989bf,
         type: 3}
