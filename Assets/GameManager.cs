@@ -11,23 +11,26 @@ public class GameManager : MonoBehaviour
 
     private Animator animator;
     GameObject player;
-    string currentScene;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
-        currentScene = SceneManager.GetActiveScene().name;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+    
     }
 
-    public void Dead()
+    public void OnTriggerEnter(Collider other)
     {
-        SceneManager.LoadScene(currentScene);
+        if(other.tag == "Player")
+        {
+            player.transform.position = new Vector3(0,0,0);
+            Debug.Log("asdasd111");
+            //SceneManager.LoadScene("3DContents");
+        }
     }
 
 }
