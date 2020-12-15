@@ -19,6 +19,5 @@ public class Distance : MonoBehaviour
     void Update()
     {
         distance = Vector3.Distance(Player.transform.position, EndPoint.transform.position);
-        Debug.Log(distance);
     }
 }

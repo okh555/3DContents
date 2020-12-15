@@ -75,13 +75,10 @@ public class UIManager : MonoBehaviour
         //Vector3 moveVec = player.transform.forward;
         //float Speed = moveVec.sqrMagnitude; // 값이 작게 나오기 때문에 제곱한 값을 사용한다.
 
-        var fwdSpeed = Vector3.Dot(playerMovement.Speed, player.transform.forward);
-        if (fwdSpeed < 0)
-            speed.text = "Velocity : " + -1 * fwdSpeed;
-        else
+       // var fwdSpeed = Vector3.Dot(playerMovement.Speed, player.transform.forward);
+        float fwdSpeed = Mathf.Min((Mathf.Abs(playerMovement.Speed.x) + Mathf.Abs(playerMovement.Speed.z)) / 2,7f);
+        fwdSpeed = Mathf.Ceil(fwdSpeed);
             speed.text = "Velocity : " + fwdSpeed;
-
-        //speed.text = "Velocity : " + Speed; //(int)playerMovement.Speed.z;
     }
 
     void SetItem()

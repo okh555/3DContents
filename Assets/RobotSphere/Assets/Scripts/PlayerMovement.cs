@@ -137,7 +137,6 @@ public class PlayerMovement : MonoBehaviour
         }
         controller.Move(jumpSpeed * Time.deltaTime); // Jump
         Speed = moveDirection + jumpSpeed;
-
     }
 
 
@@ -146,9 +145,11 @@ public class PlayerMovement : MonoBehaviour
         controller.velocity.Set(0, 0, 0);
         controller.enabled = false;
         anim.SetFloat("Speed", 0);
-        if(Input.GetKey(KeyCode.Space))
+        Speed = Vector3.zero;
+        if (Input.GetKey(KeyCode.Space))
         {
-
+            Debug.Log("Wall Jumping");
+            Debug.Log("Wall Jumping");
             wallJump = false;
             controller.enabled = true;
             jumpSpeed.y = Mathf.Sqrt(wallJumpHeight * -3.0f * gravity);
