@@ -1148,6 +1148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f02ffddc57cc5a74c81505bd776b5cf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: {fileID: 0}
   timer: {fileID: 1619651705}
   item:
   - {fileID: 2098559513}
@@ -1320,7 +1321,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &233633439
 MonoBehaviour:
@@ -2258,12 +2259,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &555491179 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4706313071402177900, guid: 7b46d8edc98f2354baeb2e41da4989bf,
-    type: 3}
-  m_PrefabInstance: {fileID: 122488434}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &576257953 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: f8f4fe0b73a7b734caa9521c697b296c,
@@ -11809,8 +11804,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 555491179}
-  m_Follow: {fileID: 555491179}
+  m_LookAt: {fileID: 2025771969}
+  m_Follow: {fileID: 2025771969}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 5
@@ -12784,6 +12779,12 @@ Transform:
   m_Father: {fileID: 525325331}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 180.00002}
+--- !u!4 &2025771969 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3597292167278320264, guid: 7b46d8edc98f2354baeb2e41da4989bf,
+    type: 3}
+  m_PrefabInstance: {fileID: 122488434}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2056692723
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13277,6 +13278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 5
+  code: 0
 --- !u!4 &766727397431221500
 Transform:
   m_ObjectHideFlags: 0
@@ -19158,3 +19160,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 5
+  code: 0
