@@ -31,6 +31,8 @@ public class DoubleJump : Item
     {
         if (collider.gameObject.name == "Player" && trigger == false)
         {
+            audioSource.clip = sound;
+            audioSource.Play();
             player = collider.gameObject;
             this.gameObject.GetComponent<Renderer>().enabled = false;
             this.gameObject.GetComponent<Collider>().enabled = false;

@@ -2,7 +2,6 @@
 
 public class SizeDown : Item 
 {
-
     public override void UsingItem()
     {
         usingItem = true;
@@ -34,6 +33,8 @@ public class SizeDown : Item
     {
         if (collider.gameObject.name == "Player" && trigger == false)
         {
+            audioSource.clip = sound;
+            audioSource.Play();
             player = collider.gameObject;
             this.gameObject.GetComponent<Renderer>().enabled = false;
             this.gameObject.GetComponent<Collider>().enabled = false;

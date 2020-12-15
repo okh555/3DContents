@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private float distToGround; // 땅과 player 사이 거리
     private float gravity = -20.0f; // 중력
     private bool wallJump = false; // 벽점프를 위한 bool 변수
-
+    private GameManager gameManager;
 
     private Vector3 moveDirection = Vector3.zero;
     private Vector3 jumpSpeed = new Vector3(0f, 0f, 0f);
@@ -20,10 +20,12 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rigidbody;
     CharacterController controller;
 
+    AudioSource audioSource;
 
     public Vector3 Speed { get; set; } // 참고용 speed
 
-
+    public AudioClip jumpClip;
+    public AudioClip runClip;
 
     public float speed { get; set; } = 13.0F; // 설정용 -> private으로 바꿀 예정
     public float jumpHeight { get; set; } = 6f; // 설정용 -> private으로 바꿀 예정
@@ -37,15 +39,21 @@ public class PlayerMovement : MonoBehaviour
         gameObject.transform.eulerAngles = rot;
         controller = GetComponent<CharacterController>();
 
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
         anim.SetBool("Open_Anim", true);
         anim.SetBool("Roll_Anim", true);
 
         distToGround = GetComponent<SphereCollider>().bounds.extents.y;
+
+
+        audioSource = GetComponent<AudioSource>();
     }
     void FixedUpdate()
     {
         CheckKey();
-        
+        CheckDead();
+
         if(wallJump)
         {
             wallMove();
@@ -56,6 +64,15 @@ public class PlayerMovement : MonoBehaviour
             Move();
         }
         gameObject.transform.eulerAngles = rot;
+    }
+
+
+    void CheckDead()
+    {
+        if(transform.position.y < -4)
+        {
+            gameManager.Dead();
+        }
     }
 
 
@@ -86,11 +103,24 @@ public class PlayerMovement : MonoBehaviour
 
         if (anim.GetBool("Open_Anim") && anim.GetCurrentAnimatorStateInfo(0).IsName("closed_Roll_Loop")) // Rolling
         {
+
             if (IsGrounded()) // Grounded
-            {
+            { 
+                
                 moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+                if (moveDirection == Vector3.zero)
+                    audioSource.mute = true ;
+                else
+                    audioSource.mute = false;
                 moveDirection = transform.TransformDirection(moveDirection);
                 moveDirection *= speed;
+
+                if (audioSource.clip != runClip && !audioSource.isPlaying)
+                {
+                    audioSource.clip = runClip;
+                    audioSource.loop = true;
+                    audioSource.Play();
+                }
             }
             else // in Air
             {
@@ -120,6 +150,9 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            audioSource.clip = jumpClip;
+            audioSource.loop = false;
+            audioSource.Play();
             if (IsGrounded() && anim.GetBool("Roll_Anim"))
             {  
                 jumpSpeed.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);

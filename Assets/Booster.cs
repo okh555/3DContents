@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class Booster : Item
 {
-
     public override void UsingItem()
     {
         time = 6;
         usingItem = true;
         currentTime = Time.time;
-        player.GetComponent<PlayerMovement>().speed *= 1.4f;
+        player.GetComponent<PlayerMovement>().speed *= 2.0f;
 
     }
 
@@ -22,7 +21,12 @@ public class Booster : Item
         {
             if (Time.time - currentTime > time && player != null)
             {
-                player.GetComponent<PlayerMovement>().speed *= 1.0f / 1.4f;
+                player.GetComponent<PlayerMovement>().speed *= 1.0f / 2.0f;
+                Renderer[] renderers = player.gameObject.GetComponentsInChildren<Renderer>();
+                for (int i = 0; i < renderers.Length; i++)
+                {
+                    renderers[i].enabled = true;
+                }
                 Destroy(this.gameObject);
             }
 
@@ -38,9 +42,11 @@ public class Booster : Item
     {
         if (collider.gameObject.name == "Player")
         {
+            audioSource.clip = sound;
+            audioSource.Play();
             player = collider.gameObject;
             this.gameObject.GetComponent<Renderer>().enabled = false;
-            ItemController = player.GetComponent<ItemController>();
+            ItemController = player.gameObject.GetComponent<ItemController>();
             this.gameObject.GetComponent<Collider>().enabled = false;
             ItemController.PushItem(this);
             trigger = true;

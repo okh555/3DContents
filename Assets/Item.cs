@@ -18,11 +18,15 @@ using UnityEngine;
     protected float spriteBlinkingTotalDuration = 1.0f; // 깜박임 지속 시간
     protected bool startBlinking = false;
 
+    public AudioClip sound;
+    protected AudioSource audioSource;
+
     protected ItemController ItemController;
 
     void Start()
     {
         ItemController = GameObject.FindGameObjectWithTag("Player").GetComponent<ItemController>();
+        audioSource = GetComponent<AudioSource>();
     }
 
 
