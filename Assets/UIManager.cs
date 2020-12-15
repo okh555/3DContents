@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+
 using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
+
 //using UnityEngine.Debug;
 
 public class UIManager : MonoBehaviour
@@ -20,6 +22,9 @@ public class UIManager : MonoBehaviour
     public Text speed;
     public Text timer;
     public RawImage[] item;
+
+    Vector3 oldPosition;
+    Vector3 currentPosition;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +32,8 @@ public class UIManager : MonoBehaviour
 
         itemController = player.GetComponent<ItemController>();
         playerMovement = player.GetComponent<PlayerMovement>();
+
+        oldPosition = player.transform.position;
     }
 
     // Update is called once per frame
@@ -55,7 +62,26 @@ public class UIManager : MonoBehaviour
 
     void SetSpeed()
     {
-       speed.text = "Velocity : " +   (int)playerMovement.Speed.y;
+        /*   
+        currentPosition = player.transform.position;
+        var distance = currentPosition - oldPosition;
+        var velocity = distance / Time.deltaTime;
+        oldPosition = currentPosition;
+        //Debug.Log(velocity);
+        
+        
+            */
+     
+        //Vector3 moveVec = player.transform.forward;
+        //float Speed = moveVec.sqrMagnitude; // 값이 작게 나오기 때문에 제곱한 값을 사용한다.
+
+        var fwdSpeed = Vector3.Dot(playerMovement.Speed, player.transform.forward);
+        if (fwdSpeed < 0)
+            speed.text = "Velocity : " + -1 * fwdSpeed;
+        else
+            speed.text = "Velocity : " + fwdSpeed;
+
+        //speed.text = "Velocity : " + Speed; //(int)playerMovement.Speed.z;
     }
 
     void SetItem()
@@ -65,7 +91,7 @@ public class UIManager : MonoBehaviour
         {
             if (items[i] == 1)
             {
-                t = Resources.Load("double") as Texture;
+                t = Resources.Load("doublejump") as Texture;
                 item[i].texture = t;
             }       
             if (items[i] == 2)
@@ -78,7 +104,7 @@ public class UIManager : MonoBehaviour
                 t = Resources.Load("booster") as Texture;
                 item[i].texture = t;
             }
-            else
+            else if(items[i] == 0)
             {
                 t = Resources.Load("basic") as Texture;
                 item[i].texture = t;
