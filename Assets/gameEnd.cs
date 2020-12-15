@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Debug = UnityEngine.Debug;
 
 public class gameEnd : MonoBehaviour
@@ -22,7 +23,7 @@ public class gameEnd : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log("End");
+            SceneManager.LoadScene("EndScene");
         }
     }
 }
